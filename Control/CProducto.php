@@ -1,8 +1,6 @@
 <?php
-
 include 'Connection.php';
 include '../modelo/Producto.php';
-
 class CProducto extends Connection{
     
     function __construct() {
@@ -30,13 +28,28 @@ class CProducto extends Connection{
     }
 
     public function consultarTodos() {
+        
         $sentencia = $this->conn->prepare("SELECT * FROM producto;");
         
-        while($row = $sentencia->fetch_array())
-        {
-            $catalogo[] = $row;
+        mysqli_stmt_execute($sentencia);
+        
+        mysqli_stmt_bind_result($sentencia,$idPro,$nombrePro,$precioPro,$cantidadPro);
+        
+        
+       
+        while (mysqli_stmt_fetch($sentencia)) {
+            echo '<form class="detalleProd" action="action" method="POST">';
+            echo "
+                
+            <label>ID del producto: {$idPro}</label><br>
+            <label>Nombre del producto: {$nombrePro}</label><br>
+            <label>Precio del producto: {$precioPro}</label><br>
+            <label>Cantidad: {$cantidadPro} en stock</label>";
+            
+            echo '</form>';
         }
-        $_SESSION['catalogo'] = serialize($catalogo); // asi se guarda
+        
+        
         
     }
     

@@ -1,70 +1,35 @@
-<?php
-include_once 'modelo/Producto.php';
-include_once 'modelo/Usuario.php';
-session_start();
-
-$usuario = new Usuario();
-$usuario->setUsername("El usuario 1");
-
-
-// sesion con usuario identificado
-//$_SESSION['usuario'] = serialize($usuario);
-
-
-// Productos del carrito..
-$todosLosProductos = [];
-
-$carrito = [];
-
-$producto1 = new Producto();
-$producto2 = new Producto();
-
-$producto1->setNombre("Producto_1");
-$producto2->setNombre("Producto_2");
-array_push($carrito, $producto1);
-array_push($carrito, $producto2);
-
-$_SESSION['carrito'] = serialize($carrito); // asi se guarda
-
-$carrito = unserialize($_SESSION['carrito']); // asi se recupera
-$catalogo = unserialize($_SESSION['catalogo']);
-
-// Listar los productos del carrito
-echo("Los productos en el carrito son:");
-for($i = 0; $i < sizeof($carrito); $i++){
-    echo("Nombres: ".$carrito[$i]->getNombre());
-}
-?>
-<!-- 
-Este es el catálogo
--->
 <!DOCTYPE html>
+<?php
+include_once 'Control/CProducto.php';
+session_start();
+?>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Tienda online</title>
+        <link href="estilos.css" rel="stylesheet" type="text/css"/>
         <script src="scripts.js" type="text/javascript"></script>
     </head>
     <body>
-        <?php
-            foreach($catalogo as $row)
-            {
-                echo($row);
-            }
-        ?>
-        <?php/*
-        if(isset($_SESSION['usuario'])){
-            */?>
-        <h1>Esto lo ve un usuario identificado</h1>
-        <?php/*
-        }
-        else{
-           */ ?>
-            <h1>Esto lo ve un usuario anónimo</h1>
-            <?php/*
-        }*/
-        ?>
+        
+        <h1>Tienda</h1>
+        
+        <nav>
+            <a  href="Ingreso.php")><b>Ingresar Como Admin | </b></a>
+            <a  href="#")><b>Ir al carrito de compras | </b></a>
+            <a  href="#")><b>Buscar Producto por ID</b> | </a>
+        </nav>
         
         <button onclick='goTo("Ingreso.php")'>Iniciar sesión</button>
+        
+        <div id="wrapper">
+            <h2>Productos Disponibles</h2> <br>
+        
+        <?php
+         $cProducto = new CProducto();
+         
+         $cProducto->consultarTodos();
+        ?>
+        </div>
     </body>
 </html>

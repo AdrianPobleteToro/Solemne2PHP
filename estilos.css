@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#wrapper{
+    margin-right: 0;
+    margin-left: 0;
+    top: 150px;
+    width: 75%;
+}
+.detalleProd{
+    border:1px solid #000;
+    display: inline-block;
+    font-size: 18px;
+    padding: 10px;
+}

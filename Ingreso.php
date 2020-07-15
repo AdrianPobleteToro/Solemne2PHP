@@ -9,10 +9,10 @@ session_start();
         <script src="scripts.js" type="text/javascript"></script>
     </head>
     <body>
-        <form action="" method="post" >
-            <input type="text" name="username" placeholder="Nombre de usuario" />
-            <input type="password" name="pass" placeholder="Contraseña" />
-            <input type="submit" value="Log in"/>
+        <form action="Control/CUsuario.php" method="post" >
+            <input type="text" name="usuario" placeholder="Nombre de usuario" /><br>
+            <input type="password" name="passwrd" placeholder="Contraseña" /><br>
+            <input type="submit" value="Enviar"/>
         </form>
         
         <button onclick='goTo("index.php")'>Volver al catálogo</button>

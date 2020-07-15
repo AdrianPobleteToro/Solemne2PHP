@@ -5,8 +5,8 @@ class Usuario {
     private $pass;
     
     function __construct() {
-        $username = "";
-        $pass = "";
+        $this->setUsername("");
+        $this->setPass("");
     }
     
     function getUsername(){
